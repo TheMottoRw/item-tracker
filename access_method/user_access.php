@@ -22,7 +22,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 
          case 'login':
         // header("Content-Type:application/json");
-        echo json_encode($userObj->login($_GET['n'],$_GET['p']));
+        echo json_encode($userObj->login($_GET['name'],$_GET['password']));
               break;
     
         case 'getUser':
