@@ -18,7 +18,7 @@ class documents{
  function declareDocument($arr){
 
     $doc_type = $arr['docType'];
-   $document_id = $arr['document_id'];
+    $document_id = $arr['document_id'];
     $name = $arr['name'];
     $phone = $arr['phone'];
     $gender = $arr['gender'];
@@ -41,7 +41,7 @@ class documents{
    function updatedocument($arr){
 
     $doc_type = $arr['docType'];
-   $document_id = $arr['document_id'];
+    $document_id = $arr['document_id'];
     $name = $arr['name'];
     $phone = $arr['phone'];
     $gender = $arr['gender'];
