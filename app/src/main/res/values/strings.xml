@@ -2,4 +2,14 @@
     <string name="app_name">Item tracker</string>
     <string name="phone_number">Phone Number</string>
     <string name="password">Password</string>
+
+    <string-array name="Document_type">
+    <item>Document lost</item>
+    <item>National id</item>
+    <item>passport</item>
+    <item>Student card</item>
+    <item>Driving licence</item>
+    <item>carte Jaune</item>
+    <item>Insurance card</item>
+</string-array>
 </resources>

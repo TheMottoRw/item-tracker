@@ -34,7 +34,7 @@
                 android:layout_marginTop="30dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="Name"
-                android:textColor="@color/black"
+                android:textColor="@color/grey_font"
                 android:textSize="20sp"
                 />
 
@@ -52,7 +52,7 @@
                 android:textColor="@color/light_blue"
                 android:hint="Enter your name "
                 android:paddingLeft="@dimen/padding"
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/grey_font"
                 />
 
 
@@ -81,7 +81,7 @@
                 android:textSize="15dp"
                 android:textColor="@color/light_blue"
                 android:hint="Enter your password "
-                android:textColorHint="@color/black"
+                android:textColorHint="@color/grey_font"
                 android:paddingLeft="@dimen/padding"
 
                 />
