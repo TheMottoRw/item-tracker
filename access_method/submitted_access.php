@@ -1,13 +1,13 @@
 <?php
 
-include_once "../declareDocument.php";
-$docObject = new declaredDocument();
+include_once "../submitted_document.php";
+$docObject = new submitDocuments();
 
 switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
 		switch ($_POST['category']) {
-          case 'declareDocument':
-			echo $docObject->declareDocument($_POST);
+          case 'submitDocument':
+			echo $docObject->submitDocument($_POST);
 			break;
 
         case 'updatedocument':

@@ -27,7 +27,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
     
         case 'getUser':
         // header("Content-Type:application/json");
-        echo json_encode($userObj->getUser($_GET['phone']));
+        echo json_encode($userObj->getUser($_GET['id']));
               break;
 
         case 'getUsers':

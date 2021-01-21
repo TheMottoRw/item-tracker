@@ -1,40 +1,43 @@
 <?php
-class users{ 
-	private $host='localhost';
-	private $user='root';
-	private $password='';
-	private $db='declareddocuments';
-	private $conn;
+include_once "Database.php";
 
- function __construct(){
- 	try{
- 	 $this->conn= new PDO("mysql:host=".$this->host.";dbname=".$this->db, $this->user,$this->password);	
- 	}catch (PDOException $exc){
- 		echo "failed to connect".$exc->getMessage();
- 	}
- }
+class users
+{
+    private $conn;
+
+    function __construct()
+    {
+        $db = new Database();
+        $this->conn = $db->getInstance();
+    }
 
  // insert user
  function insertUser($arr){
+   $response = ['status' => 'ok', 'message' => "Successful inserted", 'id' => 0];
 
     $name = $arr['name'];
     $phone = $arr['phone'];
-    $password = $arr['password'];
-   
-    $insert = $this->conn->prepare("INSERT INTO users set name=:n,phone=:phone,password=:password");
+    $password = bson_encode('password');
+    $sector = $arr['sector'];
+    
 
-    $insert->execute(array('n'=>$name,'phone'=>$phone,'password'=>$password));
-    if($insert->rowCount()>0){
-      echo "you added activity ".$this->conn->lastInsertId();
-      
+   
+    $insert = $this->conn->prepare("INSERT INTO residents set name=:n,phone=:phone,password=:password,sector=:sect");
+
+    $insert->execute(array('n'=>$name,'phone'=>$phone,'password'=>$password,'sect'=>$sector));
+    if ($insert->rowCount() > 0) {
+            $response['message'] = "you added user ";
+            $response['id'] = $this->conn->lastInsertId();
+        } else {
+            $response = ['status' => 'fail', 'message' => "failed to add user", 'error' => $insert->errorInfo()];
+        }
+        return $response;
     }
-    else{
-      echo "failed to add".json_encode($insert->errorInfo());
-    }
-  }
 
   // update user 
    function updateUser($arr){
+
+    $response = ['status' => 'ok', 'message' => "Successful updated", 'id' => 0];
 
     $name = $arr['name'];
     $phone = $arr['phone'];
@@ -42,18 +45,16 @@ class users{
     $id = $arr['id'];
     
   
-  $upd=$this->conn->prepare("UPDATE users set name=:n,phone=:phone,password=:password where id=:i");
+  $upd=$this->conn->prepare("UPDATE residents set name=:n,phone=:phone,password=:password,sector=:sect where id=:i");
 
-  $upd->execute(array('n'=>$name,'phone'=>$phone,'password'=>$password,'i'=>$id));
+  $upd->execute(array('n'=>$name,'phone'=>$phone,'password'=>$password,'sect'=>$sector,'i'=>$id));
 
-  if($upd->rowCount()>0){
-    echo "database updated";
+ if ($upd->rowCount() == 0) {
+      $response = ['status' => 'fail', 'message' => "failed to update user", 'id' => $id, 'error' => $upd->errorInfo()];
+        }
+        return $response;
+    }
 
-  }
- else {
-  echo "failed to update".json_encode($upd->errorInfo());
- } 
-   }
     
     function login($name,$password){
       $getall = $this->conn->prepare("SELECT id,name,phone from users where name=:n AND password=:p");
@@ -71,9 +72,9 @@ class users{
     }
 
 // fetch user
-    function getUser($phone){
-      $getall = $this->conn->prepare("SELECT * from users where phone=:p");
-      $getall->execute(array('p'=>$phone));
+    function getUser($id){
+      $getall = $this->conn->prepare("SELECT * from users where id=:i");
+      $getall->execute(array('i'=>$id));
       $data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   
     }

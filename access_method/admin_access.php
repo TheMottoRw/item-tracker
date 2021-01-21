@@ -1,6 +1,6 @@
 <?php
 
-include_once "../declareDocument.php";
+include_once "../admin.php";
 $adminObj = new admin();
 
 switch ($_SERVER['REQUEST_METHOD']) {

@@ -1,89 +1,87 @@
 <?php
-class admin{ 
-	private $host='localhost';
-	private $user='root';
-	private $password='';
-	private $db='declareddocuments';
-	private $conn;
+include_once "Database.php";
 
- function __construct(){
- 	try{
- 	 $this->conn= new PDO("mysql:host=".$this->host.";dbname=".$this->db, $this->user,$this->password);	
- 	}catch (PDOException $exc){
- 		echo "failed to connect".$exc->getMessage();
- 	}
- }
+class admin
+{
+    private $conn;
+
+    function __construct()
+    {
+        $db = new Database();
+        $this->conn = $db->getInstance();
+    }
 
  // declare 
  function insertAdmin($arr){
 
+    $response = ['status' => 'ok', 'message' => "Admin successful inserted", 'id' => 0];
+
     $name = $arr['name'];
     $category = $arr['category'];
     $phone = $arr['phone'];
-    $national_id= $arr['nid'];
+    $national_id= $arr['national_id'];
     $sector = $arr['sector'];
-    $apssword = $arr['password'];
+    $password = base64_encode('password');
     $done_by = $arr['done_by'];
 
-   	$insert = $this->conn->prepare("INSERT INTO admin set name=:name,category=:cat,phone=:phone,nid=:nid,sector=:sec,password=:password,done_by=:done");
+   	$insert = $this->conn->prepare("INSERT INTO admin set name=:name,category=:cat,phone=:phone,national_id=:nid,sector=:sec,password=:password,done_by=:done");
 
-  	$insert->execute(array('name'=>$name,'cat'=>$category,'phone'=>$phone,'nid'=>$nid,'sec'=>$sector,'password'=>$password,'done'=>$done_by));
+  	$insert->execute(array('name'=>$name,'cat'=>$category,'phone'=>$phone,'nid'=>$national_id,'sec'=>$sector,'password'=>$password,'done'=>$done_by));
   	if($insert->rowCount()>0){
-  		echo "you added admin ".$this->conn->lastInsertId();
-      
-  	}
-  	else{
-  		echo "failed to add".json_encode($insert->errorInfo());
-  	}
-  }
+      $response['message'] = "admin added ";
+  	  $response['id'] = $this->conn->lastInsertId();
+        } else {
+            $response = ['status' => 'fail', 'message' => "failed to add admin", 'error' => $insert->errorInfo()];
+        }
+        return $response;
+    }
 
   // update info 
    function updateAdmin($arr){
 
-     $name = $arr['name'];
+$response = ['status' => 'ok', 'message' => "Admin successful inserted", 'id' => $arr['id']];
+
+    $name = $arr['name'];
     $category = $arr['category'];
     $phone = $arr['phone'];
-    $national_id= $arr['nid'];
+    $national_id= $arr['national_id'];
     $sector = $arr['sector'];
-    $apssword = $arr['password'];
+    $password = base64_encode('password');
     $done_by = $arr['done_by'];
-    $id = $arr['id'];
+    $id => $arr['id'];
 
     
   
-  $upd=$this->conn->prepare("UPDATE admin set name=:name,category=:cat,phone=:phone,nid=:nid,sector=:sec,password=:password,done_by=:done where id=:i");
+  $upd=$this->conn->prepare("UPDATE  admin set name=:name,category=:cat,phone=:phone,national_id=:nid,sector=:sec,password=:password,done_by=:done where id=:i");
 
-  $upd->execute(array('name'=>$name,'cat'=>$category,'phone'=>$phone,'nid'=>$nid,'sec'=>$sector,'password'=>$password,'done'=>$done_by,'i'=>$id));
+  $upd->execute(array('name'=>$name,'cat'=>$category,'phone'=>$phone,'nid'=>$national_id,'sec'=>$sector,'password'=>$password,'done'=>$done_by,'i'=>$id));
 
-  if($upd->rowCount()>0){
-  	echo "database updated";
-
-  }
- else {
- 	echo "failed to update".json_encode($upd->errorInfo());
- } 
-   }
+  if ($upd->rowCount() == 0) {
+            $response = ['status' => 'fail', 'message' => "failed to update admin table", 'id' => $id, 'error' => $upd->errorInfo()];
+        }
+        return $response;
+    }
 
    
    function deleteAdmin($id){
+    $response = ['status' => 'ok', 'message' => "Successful deleted admin", 'id' => 0];
+
    	$del = $this->conn->prepare("DELETE from admin where id=:i");
    	$del->execute(array('i' =>$id));
-   	if ($del){
-   		echo "deleted succeffully";
-   	}
-    else{
-     echo "failed to delete".json_encode($del->errorInfo());
-   }
+   if ($del->rowCount() == 0) {
+            $response = ['status' => 'fail', 'message' => "Failed to delete", 'id' => $id, "error" => $del->errorInfo()];
+        }
     }
     
    function getAdminSectors($category,$sector){
+    $response = ['status' => 'ok', 'message' => "Admin sector"];
     $del = $this->conn->prepare("DELETE from admin where category=:cat AND sector=:sec");
     $del->execute(array('cat' =>$category,'sec' =>$sector));
     if ($del){
-      echo "fetch successful";
+    $response['message'] = "fetched succesfully ";
     }
     else{
-     echo "failed to fetch".json_encode($del->errorInfo());
+     $response =['message'=> "failed to fetch ",'error' => $del->errorInfo()];
    }
     }
 
