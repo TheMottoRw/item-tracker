@@ -7,11 +7,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
   case 'POST':
     switch ($_POST['category']) {
           case 'insertUser':
-      echo $userObj->insertUser($_POST);
+      echo json_encode($userObj->insertUser($_POST));
       break;
 
         case 'updateUser':
-    $userObj->updateUser($_POST);
+   echo json_encode( $userObj->updateUser($_POST));
     break;
 
     }

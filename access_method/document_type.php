@@ -7,11 +7,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
 		switch ($_POST['category']) {
           case 'insertDocumentType':
-			echo $docObject->insertDocumentType($_POST);
+			echo json_encode($docObject->insertDocumentType($_POST));
 			break;
 
         case 'updatedocumentType':
-		$docObject->updatedocumentType($_POST);
+	echo json_encode($docObject->updatedocumentType($_POST));
 		break;
 
 		}
@@ -21,7 +21,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	switch ($_GET['category']) {
 
         case 'deletedocumentType':
-        $docObject->deletedocumentType($_GET['id']); 
+      echo json_encode($docObject->deletedocumentType($_GET['id'])); 
          break;
         
 

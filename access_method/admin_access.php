@@ -7,11 +7,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	case 'POST':
 		switch ($_POST['category']) {
           case 'insertAdmin':
-			echo $adminObj->insertAdmin($_POST);
+			echo json_encode($adminObj->insertAdmin($_POST));
 			break;
 
         case 'updateAdmin':
-		$adminObj->updateAdmin($_POST);
+		echo json_encode($adminObj->updateAdmin($_POST));
 		break;
 
 		}
@@ -21,7 +21,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
 	switch ($_GET['category']) {
 
         case 'deleteAdmin':
-        $adminObj->deleteAdmin($_GET['id']); 
+       echo json_encode($adminObj->deleteAdmin($_GET['id'])); 
          break;
         
         case 'getAdminSectors':
