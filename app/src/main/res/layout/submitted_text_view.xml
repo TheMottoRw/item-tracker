@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_gravity="center"
+    >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        >
+        <RelativeLayout
+            android:id="@+id/subtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/borders"
+            android:padding="10dp"
+            android:layout_margin="1dp"
+
+            >
+            <TextView
+                android:id="@+id/documenttype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="doc Type"
+                android:textSize="12dp"
+                android:textColor="@color/light_blue"
+                android:layout_alignParentLeft="true"
+                />
+            <TextView
+                android:id="@+id/givdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="declared date"
+                android:textSize="12dp"
+                android:textColor="@color/teal_200"
+                android:layout_alignParentRight="true"
+                android:paddingRight="5dp"
+                />
+
+            <TextView
+                android:id="@+id/ownerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="11dp"
+                android:text="Name"
+                android:textColor="@color/light_blue"
+                android:textSize="12dp"
+
+                />
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="11dp"
+                android:text="Status"
+                android:layout_below="@id/ownerName"
+                android:textColor="@color/light_blue"
+                android:textSize="12dp"
+                android:paddingTop="@dimen/paddin_recycle"
+
+                />
+
+            <TextView
+                android:id="@+id/documentid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dtype"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="28dp"
+                android:text="doc id "
+                android:textColor="@color/light_blue"
+                android:textSize="12dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="@dimen/paddin_recycle"
+                />
+
+            <TextView
+                android:id="@+id/given"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dtype"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="20dp"
+                android:text="given by "
+                android:paddingRight="5dp"
+                android:textColor="@color/light_blue"
+                android:textSize="12dp"
+                android:paddingTop="@dimen/paddin_recycle"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
