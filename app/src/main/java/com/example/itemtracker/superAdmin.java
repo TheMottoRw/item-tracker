@@ -28,11 +28,6 @@ public class superAdmin extends AppCompatActivity {
         setContentView(R.layout.activity_super_admin);
 
 
-//        passdata = new Bundle(); // creating bundle objects
-//
-//        passdata.putString("card",readcardnum);
-
-
         BottomNavigationView bottomNavigator = findViewById(R.id.nav_view);
         bottomNavigator.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -43,7 +38,7 @@ public class superAdmin extends AppCompatActivity {
                         selectedFragment = new MainActivity();
                         break;
                     case R.id.navAdmin:
-                        selectedFragment = new (); // add admin fragment
+                        selectedFragment = new admin_view(); // add admin fragment
                         break;
                     case R.id.document:
                         selectedFragment = new documentType_view();

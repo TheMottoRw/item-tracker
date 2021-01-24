@@ -14,7 +14,7 @@
 
         >
         <RelativeLayout
-            android:id="@+id/subtLayout"
+            android:id="@+id/rtLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/borders"
@@ -23,78 +23,49 @@
 
             >
             <TextView
-                android:id="@+id/documenttype"
+                android:id="@+id/adminName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="doc Type"
+                android:text="Admin name"
                 android:textSize="12dp"
                 android:textColor="@color/light_blue"
                 android:layout_alignParentLeft="true"
                 />
             <TextView
-                android:id="@+id/givdate"
+                android:id="@+id/phoneAdm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="given date"
+                android:text="admin Phone"
                 android:textSize="12dp"
-                android:textColor="@color/teal_200"
+                android:textColor="@color/purple_200"
                 android:layout_alignParentRight="true"
                 android:paddingRight="5dp"
                 />
 
             <TextView
-                android:id="@+id/ownerName"
+                android:id="@+id/sectorAdm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="11dp"
-                android:text="Name"
+                android:text="Admin sector"
                 android:textColor="@color/light_blue"
                 android:textSize="12dp"
 
                 />
-            <TextView
-                android:id="@+id/status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginRight="11dp"
-                android:text="Status"
-                android:layout_below="@id/ownerName"
-                android:textColor="@color/light_blue"
-                android:textSize="12dp"
-                android:paddingTop="@dimen/paddin_recycle"
-
-                />
 
             <TextView
-                android:id="@+id/documentid"
+                android:id="@+id/doneby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/dtype"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="28dp"
-                android:text="doc id "
-                android:textColor="@color/light_blue"
-                android:textSize="12dp"
-                android:paddingLeft="5dp"
-                android:paddingTop="@dimen/paddin_recycle"
-                />
-
-            <TextView
-                android:id="@+id/given"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dtype"
+                android:layout_below="@+id/phoneAdm"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="20dp"
-                android:text="given by "
+                android:layout_marginTop="24dp"
+                android:text="done by "
                 android:paddingRight="5dp"
                 android:textColor="@color/light_blue"
-                android:textSize="12dp"
-                android:paddingTop="@dimen/paddin_recycle"/>
+                android:textSize="12dp" />
 
         </RelativeLayout>
     </ScrollView>

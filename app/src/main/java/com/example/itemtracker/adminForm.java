@@ -17,30 +17,35 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.snackbar.Snackbar;
 
-public class documentType extends AppCompatActivity {
+public class adminForm extends AppCompatActivity {
 
-    public EditText docname,addedby;
-    public Button insertdocument;
+    public EditText category,admin_name,phone,nationalid,admin_sector,admin_password;
+    public Button registerAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_document_type);
+        setContentView(R.layout.activity_admin_form);
 
-       docname = findViewById(R.id.docname);
-       addedby = findViewById(R.id.addedby);
-       insertdocument = findViewById(R.id.submitbutton);
+     category = findViewById(R.id.cat);
+     admin_name = findViewById(R.id.adminname);
+     phone = findViewById(R.id.adminphone);
+     nationalid = findViewById(R.id.nid);
+     admin_sector = findViewById(R.id.adminSector);
+     admin_password = findViewById(R.id.adminpassword);
 
-       insertdocument.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
+     registerAdmin = findViewById(R.id.registerAdmin);
 
-           }
-       });
+     registerAdmin.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
 
-        void insertDocumentType() {
+         }
+     });
 
-            RequestQueue queue = Volley.newRequestQueue(documentType.this);
+        void insertAdmin() {
+
+            RequestQueue queue = Volley.newRequestQueue(adminForm.this);
             String url = "";
             Log.d("Req", url);
 // Request a string response from the provided URL.
@@ -49,7 +54,7 @@ public class documentType extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             // Display the first 500 characters of the response string.
-                            Snackbar.make(insertDocumentType, response, Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(insertAdmin, response, Snackbar.LENGTH_SHORT).show();
                         }
                     }, new Response.ErrorListener() {
                 @Override
@@ -63,5 +68,7 @@ public class documentType extends AppCompatActivity {
 
 
         }
+
+
     }
 }
