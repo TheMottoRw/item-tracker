@@ -10,5 +10,8 @@ public class documentType extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document_type);
+
+        // aha hazajya ibya document type form
+
     }
 }

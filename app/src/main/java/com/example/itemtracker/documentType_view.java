@@ -3,15 +3,16 @@ package com.example.itemtracker;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,10 +25,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-public class MainActivity extends Fragment {
 
-    private FloatingActionButton fabdecla;
-    private RecyclerView declaRecycle;
+public class documentType_view extends Fragment {
+
+    private FloatingActionButton fabaddDocument;
+    private RecyclerView docRecycle;
     private RecyclerView.LayoutManager layoutManager;
     public Context ContextCtx;
 
@@ -35,20 +37,20 @@ public class MainActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view =  inflater.inflate(R.layout.activity_main, container, false);
+        final View view =  inflater.inflate(R.layout.fragment_document_type_view, container, false);
 
 
-        fabdecla = view.findViewById(R.id.fab_decla);
+        fabaddDocument = view.findViewById(R.id.fab_add);
 
 
         // for recycle view
-        declaRecycle = view.findViewById(R.id.declaRecycleView);
+        docRecycle = view.findViewById(R.id.docRecycleView);
         layoutManager = new LinearLayoutManager(view.getContext());
-        declaRecycle.setLayoutManager(layoutManager);
+        docRecycle.setLayoutManager(layoutManager);
         fetch_Data();
 
 
-        fabdecla.setOnClickListener(new View.OnClickListener() {
+        fabaddDocument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addReservation  = new Intent (view.getContext(), declaration_form.class);
@@ -90,7 +92,7 @@ public class MainActivity extends Fragment {
 //
                                 declarationAdapter adaptExpenses = new declarationAdapter(ContextCtx, array);
 
-                                declaRecycle.setAdapter(adaptExpenses);
+                                docRecycle.setAdapter(adaptExpenses);
 
 
                             }

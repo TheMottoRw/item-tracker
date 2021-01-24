@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_gravity="center"
+    >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        >
+        <RelativeLayout
+            android:id="@+id/docLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/borders"
+            android:padding="10dp"
+            android:layout_margin="1dp"
+
+            >
+            <TextView
+                android:id="@+id/documentname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="doc name"
+                android:textSize="12dp"
+                android:textColor="@color/light_blue"
+                android:layout_alignParentLeft="true"
+                />
+            <TextView
+                android:id="@+id/addby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="added by"
+                android:textSize="12dp"
+                android:textColor="@color/purple_200"
+                android:layout_alignParentRight="true"
+                android:paddingRight="5dp"
+                />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

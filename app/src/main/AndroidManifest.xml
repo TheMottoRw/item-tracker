@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ItemTracker">
-        <activity android:name=".documentType"></activity>
+        <activity
+            android:name=".superAdmin"
+            android:label="@string/title_activity_super_admin"></activity>
+        <activity android:name=".documentType" />
         <activity android:name=".submitted_documents" />
         <activity android:name=".admin_view" />
         <activity android:name=".declaration_form" />
