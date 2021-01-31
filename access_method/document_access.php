@@ -1,7 +1,7 @@
 <?php
 
-include_once "../declareDocument.php";
-$docObject = new declaredDocument();
+include_once "../DocumentDeclaration.php";
+$docObject = new DocumentDeclaration();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':

@@ -1,7 +1,7 @@
 <?php
 
-include_once "../document_type.php";
-$docObject = new documentType();
+include_once "../DocumentTypes.php.php";
+$docObject = new DocumentTypes();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':

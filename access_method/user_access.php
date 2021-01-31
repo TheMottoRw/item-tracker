@@ -1,7 +1,7 @@
 <?php
 
-include_once "../appusers.php";
-$userObj = new users();
+include_once "../Residents.php";
+$userObj = new Residents();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':

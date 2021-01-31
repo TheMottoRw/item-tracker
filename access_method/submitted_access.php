@@ -1,7 +1,7 @@
 <?php
 
-include_once "../submitted_document.php";
-$docObject = new submitDocuments();
+include_once "../DocumentSubmission.php";
+$docObject = new DocumentSubmission();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':

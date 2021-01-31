@@ -2,7 +2,7 @@
 include_once "Database.php";
 include_once "declareDocument.php";
 
-class submitDocuments
+class DocumentSubmission
 {
     private $conn;
 

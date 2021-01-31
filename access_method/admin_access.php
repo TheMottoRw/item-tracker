@@ -1,7 +1,7 @@
 <?php
 
-include_once "../admin.php";
-$adminObj = new admin();
+include_once "../Admin.php";
+$adminObj = new Admin();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':

@@ -1,7 +1,7 @@
 <?php
 include_once "Database.php";
 
-class documentType
+class DocumentTypes
 {
     private $conn;
 

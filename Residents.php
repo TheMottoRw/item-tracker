@@ -1,7 +1,7 @@
 <?php
 include_once "Database.php";
 
-class users
+class Residents
 {
     private $conn;
 
