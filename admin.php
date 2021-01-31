@@ -21,12 +21,12 @@ class admin
     $phone = $arr['phone'];
     $national_id= $arr['national_id'];
     $sector = $arr['sector'];
-    $password = base64_encode('password');
+    $password = base64_encode($arr['password']);
     $done_by = $arr['done_by'];
 
-   	$insert = $this->conn->prepare("INSERT INTO admin set name=:name,category=:cat,phone=:phone,national_id=:nid,sector=:sec,password=:password,done_by=:done");
+   	$insert = $this->conn->prepare("INSERT INTO admin set name=:names,category=:cat,phone=:phone,national_id=:nid,sector=:sec,password=:password,done_by=:done");
 
-  	$insert->execute(array('name'=>$name,'cat'=>$category,'phone'=>$phone,'nid'=>$national_id,'sec'=>$sector,'password'=>$password,'done'=>$done_by));
+  	$insert->execute(array('names'=>$name,'cat'=>$category,'phone'=>$phone,'nid'=>$national_id,'sec'=>$sector,'password'=>$password,'done'=>$done_by));
   	if($insert->rowCount()>0){
       $response['message'] = "admin added ";
   	  $response['id'] = $this->conn->lastInsertId();
@@ -39,7 +39,7 @@ class admin
   // update info 
    function updateAdmin($arr){
 
-$response = ['status' => 'ok', 'message' => "Admin successful inserted", 'id' => $arr['id']];
+$response = ['status' => 'ok', 'message' => "Admin successful updated", 'id' => $arr['id']];
 
     $name = $arr['name'];
     $category = $arr['category'];
@@ -48,7 +48,7 @@ $response = ['status' => 'ok', 'message' => "Admin successful inserted", 'id' =>
     $sector = $arr['sector'];
     $password = base64_encode('password');
     $done_by = $arr['done_by'];
-    $id => $arr['id'];
+    $id = $arr['id'];
 
     
   
@@ -71,18 +71,15 @@ $response = ['status' => 'ok', 'message' => "Admin successful inserted", 'id' =>
    if ($del->rowCount() == 0) {
             $response = ['status' => 'fail', 'message' => "Failed to delete", 'id' => $id, "error" => $del->errorInfo()];
         }
+   return $response;
     }
     
    function getAdminSectors($category,$sector){
     $response = ['status' => 'ok', 'message' => "Admin sector"];
-    $del = $this->conn->prepare("DELETE from admin where category=:cat AND sector=:sec");
+    $del = $this->conn->prepare("SELECT * FROM admin where category=:cat AND sector=:sec");
     $del->execute(array('cat' =>$category,'sec' =>$sector));
-    if ($del){
-    $response['message'] = "fetched succesfully ";
-    }
-    else{
-     $response =['message'=> "failed to fetch ",'error' => $del->errorInfo()];
-   }
+   $response['data'] = $del->fetchAll(PDO::FETCH_ASSOC);
+    return $response;
     }
 
     function All_Admin(){
@@ -90,6 +87,12 @@ $response = ['status' => 'ok', 'message' => "Admin successful inserted", 'id' =>
       $getall->execute();
       $data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   
+    }
+    function getById($datas){
+        $getall = $this->conn->prepare("SELECT * from admin WHERE id=:id");
+        $getall->execute(['id'=>$datas['id']]);
+        $data = $getall->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
     }
 
 }

@@ -1,5 +1,6 @@
 <?php
 include_once "Database.php";
+include_once "declareDocument.php";
 
 class submitDocuments
 {
@@ -9,6 +10,7 @@ class submitDocuments
     {
         $db = new Database();
         $this->conn = $db->getInstance();
+        $this->declaredDocs = new declaredDocument();
     }
 
 
@@ -16,18 +18,22 @@ class submitDocuments
  function submitDocument($arr){
   $response = ['status' => 'ok', 'message' => "Submitted successful", 'id' => 0];
 
-    $doc_type = $arr['document_type'];
-    $name = $arr['name'];
-    $document_id = $arr['document_id'];
-    $document_picture = $arr['document_picture'];
-    $status = $arr['status'];
-    $added_by = $arr['added_by'];
-    $given_by = $arr['given_by'];
-  
-   
-   	$insert = $this->conn->prepare("INSERT INTO submitted_documents set document_type=:doc,document_id=:docid,document_picture=:dpic,name=:name,status=:stat,added_by=:add,given_by=:given");
+     $doc_type = $arr['document_type'];
+     $name = $arr['name'];
+     $document_id = $arr['document_id'];
+     $document_picture = $arr['document_picture'];
+     $addedBy = $arr['added_by'];
 
-  	$insert->execute(array('doc'=>$doc_type,'docid'=>$document_id,'name'=>$name,'dpic'=>$document_picture,'stat'=>"Available",'add'=>$added_by,'given'=>$given_by));
+     //check if doc has been declared
+     $docInfo = $this->declaredDocs->getBySerial($document_id);
+     if(count($docInfo) > 0){
+         $qy = $this->conn->prepare("UPDATE declared_documents SET status=:status WHERE document_id=:docid");
+         $qy->execute(['status'=>'found','docid'=>$document_id]);
+     }
+
+   	$insert = $this->conn->prepare("INSERT INTO submitted_documents set document_type=:doc,document_id=:docid,document_picture=:dpic,name=:name,added_by=:addby");
+
+  	$insert->execute(array('doc'=>$doc_type,'docid'=>$document_id,'name'=>$name,'dpic'=>$document_picture,'addby'=>$addedBy));
   	if($insert->rowCount()>0){
   		$response['message'] = "you submitted a document ";
             $response['id'] = $this->conn->lastInsertId();
@@ -46,13 +52,16 @@ class submitDocuments
     $name = $arr['name'];
     $document_id = $arr['document_id'];
     $document_picture = $arr['document_picture'];
-    $status = $arr['status'];
-    $added_by = $arr['added_by'];
-    $given_by = $arr['given_by'];
     $id = $arr['id'];
-    
-  
-  $upd=$this->conn->prepare("UPDATE submitted_documents set document_type=:doc,document_id=:docid,document_picture=:dpic,name=:name,status=:stat,added_by=:add,given_by=:given where id=:i");
+
+       //check if doc has been declared
+       $docInfo = $this->declaredDocs->getBySerial($document_id);
+       if(count($docInfo) > 0){
+           $qy = $this->conn->prepare("UPDATE declared_documents SET status=:status WHERE document_id=:docid");
+           $qy->execute(['status'=>'found','docid'=>$document_id]);
+       }
+
+       $upd=$this->conn->prepare("UPDATE submitted_documents set document_type=:doc,document_id=:docid,document_picture=:dpic,name=:name where id=:i");
 
   $upd->execute(array('doc'=>$doc_type,'docid'=>$document_id,'name'=>$name,'dpic'=>$document_picture,'stat'=>"Available",'add'=>$added_by,'given'=>$given_by,'i'=>$id));
 
@@ -63,7 +72,7 @@ class submitDocuments
   }
 
    // delete document
-   function deletedocument($id){
+   function deleteDocument($id){
 
     $response = ['status' => 'ok', 'message' => "Successful deleted document type", 'id' => 0];
 
@@ -72,32 +81,26 @@ class submitDocuments
    	if ($del->rowCount() == 0) {
             $response = ['status' => 'fail', 'message' => "Failed to delete", 'id' => $id, "error" => $del->errorInfo()];
         }
+   	return $response;
     }
     
     //  retrieve 
     function getdocument($id){
-    	$getall = $this->conn->prepare("SELECT * from submitted_documents where id=:i");
+    	$getall = $this->conn->prepare("SELECT sd.*,dt.document_name from submitted_documents sd  INNER JOIN document_types dt ON sd.document_type=dt.doc_id  where sd.id=:i");
     	$getall->execute(array('i'=>$id));
     	$data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   
     }
 
-     function active_document(){
-      $getall = $this->conn->prepare("SELECT * from submitted_documents where status='available'");
-      $getall->execute();
-      $data = $getall->fetchAll(PDO::FETCH_ASSOC);
-        return $data;   
-    }
-
-     function deleted_document(){
-      $getall = $this->conn->prepare("SELECT * from submitted_documents where status='deleted'");
-      $getall->execute();
+     function getByStatus($arr){
+      $getall = $this->conn->prepare("SELECT sd.*,dt.document_name from submitted_documents sd  INNER JOIN document_types dt ON sd.document_type=dt.doc_id where sd.status=:status");
+      $getall->execute(['status'=>$arr['status']]);
       $data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   
     }
 
     function All_documents(){
-      $getall = $this->conn->prepare("SELECT * from submitted_documents");
+      $getall = $this->conn->prepare("SELECT sd.*,dt.document_name from submitted_documents sd  INNER JOIN document_types dt ON sd.document_type=dt.doc_id");
       $getall->execute();
       $data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   

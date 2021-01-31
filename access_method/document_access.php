@@ -1,14 +1,14 @@
 <?php
 
-include_once "../submitted_document.php";
-$docObject = new submitDocuments();
+include_once "../declareDocument.php";
+$docObject = new declaredDocument();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         header("Content-Type:application/json");
         switch ($_POST['category']) {
-            case 'register':
-                echo json_encode($docObject->submitDocument($_POST));
+            case 'declare':
+                echo json_encode($docObject->declareDocument($_POST));
                 break;
 
             case 'update':
@@ -23,7 +23,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         switch ($_GET['category']) {
 
             case 'delete':
-                echo json_encode($docObject->deleteDocument($_GET['id']));
+                echo json_encode($docObject->deletedocument($_GET['id']));
+                break;
+
+            case 'deleted':
+                echo json_encode($docObject->deletedocument($_GET['id']));
                 break;
 
             case 'getById':
@@ -36,6 +40,15 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 echo json_encode($docObject->getByStatus($_GET));
                 break;
 
+            case 'bysector':
+                // header("Content-Type:application/json");
+                echo json_encode($docObject->getBySector($_GET));
+                break;
+
+            case 'deleted':
+                // header("Content-Type:application/json");
+                echo json_encode($docObject->deletedocument($_GET['id']));
+                break;
 
             case 'get':
                 // header("Content-Type:application/json");

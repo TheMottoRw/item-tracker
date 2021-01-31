@@ -19,7 +19,7 @@ class documentType
         $document_name = $arr['document_name'];
 
 
-        $insert = $this->conn->prepare("INSERT INTO document_type set document_name=:docname");
+        $insert = $this->conn->prepare("INSERT INTO document_types set document_name=:docname");
 
         $insert->execute(array('docname' => $document_name));
         if ($insert->rowCount() > 0) {
@@ -37,9 +37,9 @@ class documentType
         $response = ['status' => 'ok', 'message' => "Document type succesful updated", 'id' => $arr['id']];
 
         $document_name = $arr['document_name'];
-        $id = $arr['doc_id'];
+        $id = $arr['id'];
 
-        $upd = $this->conn->prepare("UPDATE document_type set document_name=:docname where doc_id=:i");
+        $upd = $this->conn->prepare("UPDATE document_types set document_name=:docname where doc_id=:i");
 
         $upd->execute(array('docname' => $document_name, 'i' => $id));
 
@@ -53,17 +53,25 @@ class documentType
     function deletedocumentType($id)
     {
         $response = ['status' => 'ok', 'message' => "Successful deleted document type", 'id' => 0];
-        $del = $this->conn->prepare("DELETE from document_type S where id=:i");
+        $del = $this->conn->prepare("DELETE from document_types where doc_id=:i");
         $del->execute(array('i' => $id));
         if ($del->rowCount() == 0) {
             $response = ['status' => 'fail', 'message' => "Failed to delete", 'id' => $id, "error" => $del->errorInfo()];
         }
+        return $response;
     }
 
 
+    function getById($arr)
+    {
+        $getall = $this->conn->prepare("SELECT * from document_types WHERE doc_id=:id");
+        $getall->execute(['id'=>$arr['id']]);
+        $data = $getall->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
     function All_documentsType()
     {
-        $getall = $this->conn->prepare("SELECT * from documents");
+        $getall = $this->conn->prepare("SELECT * from document_types");
         $getall->execute();
         $data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;

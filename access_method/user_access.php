@@ -4,46 +4,52 @@ include_once "../appusers.php";
 $userObj = new users();
 
 switch ($_SERVER['REQUEST_METHOD']) {
-  case 'POST':
-    switch ($_POST['category']) {
-          case 'insertUser':
-      echo json_encode($userObj->insertUser($_POST));
-      break;
+    case 'POST':
+        header("Content-Type:application/json");
+        switch ($_POST['category']) {
+            case 'register':
+                echo json_encode($userObj->insertUser($_POST));
+                break;
 
-        case 'updateUser':
-   echo json_encode( $userObj->updateUser($_POST));
-    break;
+            case 'update':
+                echo json_encode($userObj->updateUser($_POST));
+                break;
 
-    }
+        }
 
-		break;
-	case 'GET':
-	switch ($_GET['category']) {
+        break;
+    case 'GET':
+        header("Content-Type:application/json");
+        switch ($_GET['category']) {
 
-         case 'login':
-        // header("Content-Type:application/json");
-        echo json_encode($userObj->login($_GET['name'],$_GET['password']));
-              break;
-    
-        case 'getUser':
-        // header("Content-Type:application/json");
-        echo json_encode($userObj->getUser($_GET['id']));
-              break;
+            case 'login':
+                // header("Content-Type:application/json");
+                echo json_encode($userObj->login($_GET['name'], $_GET['password']));
+                break;
 
-        case 'getUsers':
-        // header("Content-Type:application/json");
-        echo json_encode($userObj->getUsers());
-              break;      
+            case 'getById':
+                // header("Content-Type:application/json");
+                echo json_encode($userObj->getUser($_GET['id']));
+                break;
 
-       
-		default:
-			echo "value of parameter category not known";
-			break;
-	}
-	break;
-	default:
-		echo $_SERVER['REQUEST_METHOD']."Request method not allowed";
-		break;
+            case 'get':
+                // header("Content-Type:application/json");
+                echo json_encode($userObj->getUsers());
+                break;
+            case 'delete':
+                // header("Content-Type:application/json");
+                echo json_encode($userObj->delete($_GET['id']));
+                break;
+
+
+            default:
+                echo json_encode(['status' => 'nocategory', 'message' => "value of parameter category not known"]);
+                break;
+        }
+        break;
+    default:
+        echo json_encode(['status' => 'methodnotallowed', 'message' => $_SERVER['REQUEST_METHOD'] . "Request method not allowed"]);
+        break;
 }
 
 ?>

@@ -17,7 +17,7 @@ class users
 
     $name = $arr['name'];
     $phone = $arr['phone'];
-    $password = bson_encode('password');
+    $password = base64_encode($arr['password']);
     $sector = $arr['sector'];
     
 
@@ -40,14 +40,14 @@ class users
     $response = ['status' => 'ok', 'message' => "Successful updated", 'id' => 0];
 
     $name = $arr['name'];
+    $sector = $arr['sector'];
     $phone = $arr['phone'];
-    $password = $arr['password'];
     $id = $arr['id'];
     
   
-  $upd=$this->conn->prepare("UPDATE residents set name=:n,phone=:phone,password=:password,sector=:sect where id=:i");
+  $upd=$this->conn->prepare("UPDATE residents set name=:n,phone=:phone,sector=:sect where id=:i");
 
-  $upd->execute(array('n'=>$name,'phone'=>$phone,'password'=>$password,'sect'=>$sector,'i'=>$id));
+  $upd->execute(array('n'=>$name,'phone'=>$phone,'sect'=>$sector,'i'=>$id));
 
  if ($upd->rowCount() == 0) {
       $response = ['status' => 'fail', 'message' => "failed to update user", 'id' => $id, 'error' => $upd->errorInfo()];
@@ -55,17 +55,10 @@ class users
         return $response;
     }
 
-    
-    function login($name,$password){
-      $getall = $this->conn->prepare("SELECT id,name,phone from users where name=:n AND password=:p");
-      $getall->execute(array('n' =>$name ,'p'=>$password));
-      $data = $getall->fetchAll(PDO::FETCH_ASSOC);
-        return $data;   
-    }
-    
+
     // fetch users
     function getUsers(){
-    	$getall = $this->conn->prepare("SELECT * from users");
+    	$getall = $this->conn->prepare("SELECT * from residents");
     	$getall->execute(array());
     	$data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   
@@ -73,12 +66,23 @@ class users
 
 // fetch user
     function getUser($id){
-      $getall = $this->conn->prepare("SELECT * from users where id=:i");
+      $getall = $this->conn->prepare("SELECT * from residents where id=:i");
       $getall->execute(array('i'=>$id));
       $data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   
     }
-   
+    function delete($id){
+        $response = ['status' => 'ok', 'message' => "Successful deleted resident", 'id' => 0];
+
+        $del = $this->conn->prepare("DELETE from residents where id=:i");
+        $del->execute(array('i' =>$id));
+        if ($del->rowCount() == 0) {
+            $response = ['status' => 'fail', 'message' => "Failed to delete", 'id' => $id, "error" => $del->errorInfo()];
+        }
+        return $response;
+    }
+
+
 
 }
 
