@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="@color/white">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbarSize="2dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="80dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Declare your item lost"
+                android:textSize="20dp"
+                android:textColor="@color/light_blue"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Item type"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+
+                />
+
+            <Spinner
+                android:id="@+id/doctype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="25dp"
+                android:textSize="15dp"
+                android:textColor="@color/light_blue"
+                android:entries="@array/Document_type"
+                android:paddingLeft="@dimen/padding"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Item identification "
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                />
+
+            <EditText
+                android:id="@+id/docid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:inputType="text"
+                android:cursorVisible="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/light_blue"
+                android:hint="Enter your document id "
+                android:paddingLeft="@dimen/padding"
+                android:textColorHint="@color/grey_font"
+                />
+            <Button
+                android:id="@+id/declare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Declare"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

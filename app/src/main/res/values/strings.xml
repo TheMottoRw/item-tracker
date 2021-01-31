@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Item tracker</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+
+    <string-array name="Document_type">
+        <item>Document lost</item>
+        <item>National id</item>
+        <item>passport</item>
+        <item>Student card</item>
+        <item>Driving licence</item>
+        <item>carte Jaune</item>
+        <item>Insurance card</item>
+    </string-array>
+    <string-array name="category">
+        <item>category</item>
+        <item>Super Admin</item>
+        <item>admin</item>
+
+    </string-array>
+    <string name="title_activity_super_admin">MainActivity</string>
+    <string name="admin">Admin</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Documents</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="processrequest">Processing request</string>
+    <string name="logout">Logout</string>
+</resources>

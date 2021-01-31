@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_gravity="center"
+    >
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+
+        >
+        <RelativeLayout
+            android:id="@+id/rtLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/borders"
+            android:padding="10dp"
+            android:layout_margin="1dp"
+
+            >
+
+
+            <TextView
+                android:id="@+id/dname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="11dp"
+                android:text="Name"
+                android:textColor="@color/light_blue"
+                android:textSize="12dp"
+
+                />
+
+
+            <TextView
+                android:id="@+id/myphone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="phone "
+                android:paddingRight="5dp"
+                android:textColor="@color/light_blue"
+                android:textSize="12dp" />
+            <TextView
+                android:id="@+id/dtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="doc Type"
+                android:textSize="12dp"
+                android:textColor="@color/light_blue"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/dname"
+                android:layout_marginTop="24dp"
+                />
+            <TextView
+                android:id="@+id/did"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="doc id "
+                android:textColor="@color/light_blue"
+                android:textSize="12dp"
+                android:paddingLeft="0dp"
+                android:layout_below="@id/myphone"
+                android:layout_marginTop="24dp"
+                />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textSize="12dp"
+                android:textColor="@color/teal_200"
+                android:paddingRight="5dp"
+                android:layout_below="@id/did"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="declared date"
+                android:textSize="12dp"
+                android:textColor="@color/teal_200"
+                android:paddingRight="5dp"
+                android:layout_below="@id/did"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>
