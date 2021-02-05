@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -61,7 +64,7 @@ public class SubmittedDocumentView extends AppCompatActivity {
         fabsub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent addReservation  = new Intent (SubmittedDocumentView.this, DeclarationForm.class);
+                Intent addReservation  = new Intent (SubmittedDocumentView.this, SubmitDocument.class);
                 startActivity(addReservation);
             }
         });
@@ -92,7 +95,7 @@ public class SubmittedDocumentView extends AppCompatActivity {
                             JSONArray array = new JSONArray(response); // convert string to json array
                             if (array.length() > 0) {
 //
-                                DeclarationAdapter adaptExpenses = new DeclarationAdapter(getApplicationContext(), array);
+                                SubmittedAdapter adaptExpenses = new SubmittedAdapter(getApplicationContext(), array);
                                 subRecycle.setAdapter(adaptExpenses);
 
                             }
@@ -113,6 +116,29 @@ public class SubmittedDocumentView extends AppCompatActivity {
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+
+        // return true so that the menu pop up is opened
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.logout:
+                helper.showToast("Successfull logged out");
+                helper.logout();
+                finish();
+                startActivity(new Intent(SubmittedDocumentView.this, Login.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 

@@ -18,17 +18,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="10dp"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Declare your item lost"
+                android:text="Submit item lost"
                 android:textSize="25dp"
                 android:textColor="@color/light_blue"
                 android:gravity="center_horizontal"
                 android:layout_marginBottom="20dp"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Item owner "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                />
+
+            <EditText
+                android:id="@+id/edtOwnerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:inputType="text"
+                android:cursorVisible="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/light_blue"
+                android:hint="Enter your document id "
+                android:paddingLeft="@dimen/padding"
+                android:textColorHint="@color/grey_font"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

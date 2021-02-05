@@ -38,7 +38,7 @@ public class SubmittedAdapter extends RecyclerView.Adapter<SubmittedAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView tvDocumentType,tvDocumentId,tvOwnerName,tvStatus,tvGivenDate,tvGivenBy,tvOther;
+        public TextView tvDocumentType,tvDocumentId,tvOwnerName,tvStatus,tvGivenDate,tvOther;
         public ViewHolder(LinearLayout lnout) {
             super(lnout);
 
@@ -47,7 +47,6 @@ public class SubmittedAdapter extends RecyclerView.Adapter<SubmittedAdapter.View
             tvOwnerName = lnout.findViewById(R.id.ownerName);
             tvStatus = lnout.findViewById(R.id.status);
             tvGivenDate = lnout.findViewById(R.id.givdate);
-            tvGivenBy = lnout.findViewById(R.id.given);
             tvOther = lnout.findViewById(R.id.otherdescription);
 
         }
@@ -61,10 +60,9 @@ public class SubmittedAdapter extends RecyclerView.Adapter<SubmittedAdapter.View
             holder.tvDocumentType.setText(object.getString("document_name"));
             holder.tvDocumentId.setText(object.getString("document_id"));
             holder.tvOwnerName.setText(object.getString("name"));
-            holder.tvGivenDate.setText(object.getString("given_by").isEmpty()?"":object.getString("given_by"));
-            holder.tvGivenBy.setText(object.getString("given_date"));
+            holder.tvGivenDate.setText(object.getString("given_date").length() == 4?"":object.getString("given_date"));
             holder.tvStatus.setText(object.getString("status"));
-            holder.tvOther.setText(object.getString("other_description"));
+            holder.tvOther.setText(object.getString("other_description").length() == 4?"":object.getString("other_description"));
 
         }catch(JSONException ex){
             Log.d("jsonerr",ex.getMessage());

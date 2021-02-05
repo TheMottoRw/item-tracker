@@ -32,7 +32,7 @@ import java.util.Map;
 public class SubmitDocument extends AppCompatActivity {
     private ProgressDialog pgdialog;
     private Helper helper;
-    private EditText edtDocumentId;
+    private EditText edtDocumentId,edtOwnerName;
     private Spinner spnDocumentType;
     private ArrayList documentList,documentListId;
     private Button btnSubmit;
@@ -47,6 +47,7 @@ public class SubmitDocument extends AppCompatActivity {
 
         spnDocumentType = findViewById(R.id.spnDocumentType);
         edtDocumentId = findViewById(R.id.edtDocumentId);
+        edtOwnerName = findViewById(R.id.edtOwnerName);
         btnSubmit = findViewById(R.id.btnSubmit);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +62,7 @@ public class SubmitDocument extends AppCompatActivity {
     public void submitDocument() {
 
         RequestQueue queue = Volley.newRequestQueue(SubmitDocument.this);
-        String url = helper.host+"/document_access.php";
+        String url = helper.host+"/submitted_access.php";
 
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
@@ -90,10 +91,12 @@ public class SubmitDocument extends AppCompatActivity {
             @Override
             public Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("category", "declare");
+                params.put("category", "register");
                 params.put("document_type", documentListId.get(spnDocumentType.getSelectedItemPosition())+"");
                 params.put("document_id", edtDocumentId.getText().toString().trim());
-                params.put("done_by", helper.getDataValue("id"));
+                params.put("document_picture", "");
+                params.put("name", edtOwnerName.getText().toString().trim());
+                params.put("added_by", helper.getDataValue("id"));
                 return params;
             }
         };
@@ -112,6 +115,7 @@ public class SubmitDocument extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray array) {
                         // Display the first 500 characters of the response string.
+                        Log.d("response",array.toString());
                         try {
                             documentList = new ArrayList();
                             documentListId = new ArrayList();

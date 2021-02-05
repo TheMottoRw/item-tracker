@@ -51,7 +51,7 @@ public class DocumentTypeView extends Fragment {
 
 
         // for recycle view
-        docRecycle = view.findViewById(R.id.docRecycleView);
+        docRecycle = view.findViewById(R.id.subRecycleView);
         layoutManager = new LinearLayoutManager(view.getContext());
         docRecycle.setLayoutManager(layoutManager);
 
