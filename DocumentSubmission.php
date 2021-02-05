@@ -1,6 +1,6 @@
 <?php
 include_once "Database.php";
-include_once "declareDocument.php";
+include_once "DocumentDeclaration.php";
 
 class DocumentSubmission
 {
@@ -10,7 +10,7 @@ class DocumentSubmission
     {
         $db = new Database();
         $this->conn = $db->getInstance();
-        $this->declaredDocs = new declaredDocument();
+        $this->declaredDocs = new DocumentDeclaration();
     }
 
 
@@ -105,9 +105,6 @@ class DocumentSubmission
       $data = $getall->fetchAll(PDO::FETCH_ASSOC);
         return $data;   
     }
-
-   
-
 }
 
 ?>

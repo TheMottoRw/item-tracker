@@ -5,8 +5,10 @@ $adminObj = new Admin();
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'POST':
+        header("Content-Type:application/json");
         switch ($_POST['cate']) {
             case 'register':
+//                echo json_encode($_POST);exit;
                 echo json_encode($adminObj->insertAdmin($_POST));
                 break;
 

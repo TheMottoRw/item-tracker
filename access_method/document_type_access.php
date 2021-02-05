@@ -1,6 +1,6 @@
 <?php
 
-include_once "../DocumentTypes.php.php";
+include_once "../DocumentTypes.php";
 $docObject = new DocumentTypes();
 
 switch ($_SERVER['REQUEST_METHOD']) {
